@@ -1,0 +1,36 @@
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+  <context-param>
+    <param-name>resteasy.guice.modules</param-name>
+    <param-value>org.example.myapp.web.module.WebModule</param-value>
+  </context-param>
+  <context-param>
+    <param-name>resteasy.providers</param-name>
+    <param-value>org.example.web.ObjectMapperResolver</param-value>
+  </context-param>
+
+  <!-- Bootstrap that registers Guice webSocket singletons -->
+  <listener>
+    <listener-class>
+      org.avaje.resteasy.Bootstrap
+    </listener-class>
+  </listener>
+
+  <filter>
+    <!--<description>Extended Resteasy filter</description>-->
+    <filter-name>RestFilter</filter-name>
+    <filter-class>org.avaje.resteasy.RestFilter</filter-class>
+    <init-param>
+      <param-name>ignore</param-name>
+      <param-value>(/favicon.ico|/(assets|images|fonts|css|js|res)/.*)</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>RestFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+</web-app>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8"/>
+<title>Metrics Request timing</title>
+<script language="javascript" type="text/javascript">
+    var wsUri = "ws://127.0.0.1:9090/metric-ws";
+    var output;
+    function doClose() {
+        websocket.close();
+    }
+
+    function init() {
+        output = document.getElementById("output");
+        testWebSocket();
+    }
+    function testWebSocket() {
+        websocket = new WebSocket(wsUri);
+        websocket.onopen = function (evt) {
+            onOpen(evt)
+        };
+        websocket.onclose = function (evt) {
+            onClose(evt)
+        };
+        websocket.onmessage = function (evt) {
+            onMessage(evt)
+        };
+        websocket.onerror = function (evt) {
+            onError(evt)
+        };
+    }
+    function onOpen(evt) {
+        document.getElementById("status").innerHTML = "connected";
+    }
+    function onClose(evt) {
+        writeToScreen("DISCONNECTED");
+    }
+    function onMessage(evt) {
+        writeToScreen('<span style="color: blue;"><pre>' + evt.data + '</pre></span>');
+    }
+    function onError(evt) {
+        writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+    }
+    function writeToScreen(message) {
+        var pre = document.createElement("p");
+        pre.style.wordWrap = "break-word";
+        pre.innerHTML = message;
+        output.appendChild(pre);
+    }
+    window.addEventListener("load", init, false);
+</script>
+<body>
+<h2>Metric Request Timing Listener: <span id="status"></span></h2>
+<div id="output"></div>
+</body>
+</html>
