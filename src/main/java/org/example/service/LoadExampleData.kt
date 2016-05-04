@@ -54,6 +54,12 @@ class LoadExampleData {
 
     Country("NZ", "New Zealand").save()
     Country("AU", "Australia").save()
+
+    Country.ref("NZ")
+
+    val nz = Country.where()
+        .code.equalTo("NZ")
+        .findUnique()
   }
 
   fun insertProducts() {
@@ -112,17 +118,14 @@ class LoadExampleData {
 
   fun insertCustomerNoContacts(name: String): Customer {
 
-    val customer = createCustomer("Roger", "15 Kumera Way", "Bos town", 1);
-    customer.name = name;
-
+    val customer = createCustomer(name, "15 Kumera Way", "Bos town", 1);
     customer.save()
     return customer;
   }
 
   fun insertCustomerNoAddress(): Customer {
 
-    val customer = Customer();
-    customer.name = "Customer NoAddress";
+    val customer = Customer("Customer NoAddress");
     customer.contacts.add(createContact("Jack", "Black"));
     customer.save()
     return customer;
@@ -136,8 +139,7 @@ class LoadExampleData {
 
   fun createCustomer(name: String, shippingStreet: String?, billingStreet: String?, contactSuffix: Int): Customer {
 
-    val customer = Customer();
-    customer.name = name;
+    val customer = Customer(name);
     if (contactSuffix > 0) {
       customer.contacts.add(Contact("Jim" + contactSuffix, "Cricket"));
       customer.contacts.add(Contact("Fred" + contactSuffix, "Blue"));

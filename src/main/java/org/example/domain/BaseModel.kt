@@ -20,18 +20,18 @@ import javax.persistence.Version;
  * elasticsearch) and audit.
  */
 @MappedSuperclass
-public abstract class BaseModel : Model() {
+abstract class BaseModel : Model() {
 
   @Id
-  public var id: Long? = null
+  var id: Long? = null
 
   @Version
-  public var version: Long? = null
+  var version: Long? = null
 
   @WhenCreated
-  public var whenCreated: Timestamp? = null
+  var whenCreated: Timestamp? = null
 
   @WhenModified
-  public var whenModified: Timestamp? = null
+  var whenModified: Timestamp? = null
 
 }

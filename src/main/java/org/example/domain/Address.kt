@@ -1,11 +1,10 @@
 package org.example.domain;
 
-import com.avaje.ebean.Model
 import org.example.domain.finder.AddressFinder
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
+import javax.persistence.Entity
+import javax.persistence.ManyToOne
+import javax.persistence.Table
+import javax.validation.constraints.Size
 
 /**
  * Address entity bean.

@@ -6,40 +6,40 @@ import com.avaje.ebean.annotation.SoftDelete
 import org.example.domain.finder.CustomerFinder
 import java.util.*
 import javax.persistence.*
+import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
 /**
  * Customer entity bean.
  */
 @DocStore
-@Cache(enableQueryCache=true)
+@Cache(enableQueryCache = true)
 @Entity
 @Table(name = "be_customer")
-class Customer() : BaseModel() {
+class Customer(
 
-  @SoftDelete
-  var deleted: Boolean = false;
+    // name is required property
+    @NotNull @Size(max = 100)
+    val name: String,
 
-  @Size(max = 100)
-  var name: String? = null;
+    @SoftDelete
+    var deleted: Boolean = false,
 
-  var registered: Date? = null;
+    var registered: Date? = null,
 
-  @Size(max = 1000)
-  var comments: String? = null;
+    @Size(max = 1000)
+    var comments: String? = null,
 
-  @ManyToOne(cascade = arrayOf(CascadeType.ALL))
-  var billingAddress: Address? = null;
+    @ManyToOne(cascade = arrayOf(CascadeType.ALL))
+    var billingAddress: Address? = null,
 
-  @ManyToOne(cascade = arrayOf(CascadeType.ALL))
-  var shippingAddress: Address? = null;
+    @ManyToOne(cascade = arrayOf(CascadeType.ALL))
+    var shippingAddress: Address? = null,
 
-  @OneToMany(mappedBy = "customer", cascade = arrayOf(CascadeType.PERSIST))
-  var contacts: MutableList<Contact> = ArrayList();
+    @OneToMany(mappedBy = "customer", cascade = arrayOf(CascadeType.PERSIST))
+    var contacts: MutableList<Contact> = ArrayList()
 
-  constructor (name: String) : this() {
-    this.name = name;
-  }
+) : BaseModel() {
 
   companion object find : CustomerFinder() {}
 
