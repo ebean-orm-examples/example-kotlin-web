@@ -1,0 +1,15 @@
+{
+  "mappings" : {
+    "customer" : {
+      "properties" : {
+        "name": { "type": "string" },
+        "registered": { "type": "date" },
+        "comments": { "type": "string" },
+        "version": { "type": "long" },
+        "whenCreated": { "type": "date" },
+        "whenModified": { "type": "date" },
+        "deleted": { "type": "boolean" }
+      }
+    }
+  }
+}

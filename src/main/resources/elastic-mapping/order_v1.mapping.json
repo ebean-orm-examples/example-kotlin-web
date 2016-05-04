@@ -1,0 +1,39 @@
+{
+  "mappings" : {
+    "order" : {
+      "properties" : {
+        "status": { "type": "string", "index": "not_analyzed" },
+        "orderDate": { "type": "date" },
+        "shipDate": { "type": "date" },
+        "customer" : {
+          "properties" : {
+            "id": { "type": "long" },
+            "name": { "type": "string" }
+          }
+        },
+        "details" : {
+          "type" : "nested",
+          "properties" : {
+            "id": { "type": "long" },
+            "orderQty": { "type": "integer" },
+            "shipQty": { "type": "integer" },
+            "unitPrice": { "type": "double" },
+            "product" : {
+              "properties" : {
+                "id": { "type": "long" },
+                "sku": { "type": "string" },
+                "name": { "type": "string" }
+              }
+            },
+            "version": { "type": "long" },
+            "whenCreated": { "type": "date" },
+            "whenModified": { "type": "date" }
+          }
+        },
+        "version": { "type": "long" },
+        "whenCreated": { "type": "date" },
+        "whenModified": { "type": "date" }
+      }
+    }
+  }
+}

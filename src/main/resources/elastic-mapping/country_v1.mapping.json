@@ -1,0 +1,9 @@
+{
+  "mappings" : {
+    "country" : {
+      "properties" : {
+        "name": { "type": "string" }
+      }
+    }
+  }
+}
