@@ -43,14 +43,14 @@ abstract class BaseResource<T> {
   }
 
   @GET
-  fun all(): List<T> {
+  open fun all(): List<T> {
     val query = server.find(beanType).order().asc("id")
     return query.findList()
   }
 
   @GET
   @Path("/{id}")
-  fun getById(@PathParam("id") id: String): T? {
+  open fun getById(@PathParam("id") id: String): T? {
 
     val query = server.find(beanType).setId(id)//.select("*")
     applyGetByIdPredicates(query)
@@ -72,7 +72,7 @@ abstract class BaseResource<T> {
 
   }
   @POST
-  fun insert(@Context uriInfo: UriInfo, bean: T): Response {
+  open fun insert(@Context uriInfo: UriInfo, bean: T): Response {
 
     try {
       validateBean(bean);
@@ -104,11 +104,12 @@ abstract class BaseResource<T> {
 
   @PUT
   @Path("/{id}")
-  fun update(@PathParam("id") id: String, bean: T): Response {
+  open fun update(@PathParam("id") id: String, bean: T): Response {
     try {
       validateBean(bean);
       sanitiseBean(bean)
 
+      server.setBeanId(bean, id)
       server.update(bean)
       postUpdate(bean)
 

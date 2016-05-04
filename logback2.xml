@@ -7,11 +7,13 @@
     </encoder>
   </appender>
 
-  <root level="TRACE">
+  <root level="WARN">
     <appender-ref ref="STDOUT"/>
   </root>
 
+  <!--<logger name="org.avaje.ebean.cache" level="TRACE"/>-->
 
+  <logger name="org.apache.ignite" level="WARN"/>
   <logger name="org.jboss.resteasy" level="WARN"/>
   <logger name="org.eclipse.jetty" level="WARN"/>
 
@@ -22,6 +24,8 @@
 
 
   <!-- Logging for SQL etc -->
+
+  <logger name="org.avaje.ebean.cache" level="TRACE"/>
 
   <logger name="org.avaje.ebean.SQL" level="TRACE"/>
   <logger name="org.avaje.ebean.TXN" level="TRACE"/>

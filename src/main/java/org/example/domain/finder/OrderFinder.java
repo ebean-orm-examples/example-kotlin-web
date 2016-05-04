@@ -23,7 +23,7 @@ public class OrderFinder extends Finder<Long,Order> {
   /**
    * Start a new typed query.
    */
-  protected QOrder where() {
+  public QOrder where() {
      return new QOrder(db());
   }
 }

@@ -1,6 +1,7 @@
 package org.example.domain;
 
-import com.avaje.ebean.annotation.CacheStrategy
+import com.avaje.ebean.annotation.Cache
+import com.avaje.ebean.annotation.DocStore
 import com.avaje.ebean.annotation.SoftDelete
 import org.example.domain.finder.CustomerFinder
 import java.util.*
@@ -10,7 +11,8 @@ import javax.validation.constraints.Size
 /**
  * Customer entity bean.
  */
-@CacheStrategy//(useBeanCache = false)
+@DocStore
+@Cache(enableQueryCache=true)
 @Entity
 @Table(name = "be_customer")
 class Customer() : BaseModel() {

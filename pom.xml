@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.avaje.jetty</groupId>
     <artifactId>runnable-war</artifactId>
-    <version>2.1.2</version>
+    <version>2.2.1</version>
   </parent>
   
   <groupId>org.example</groupId>
@@ -18,7 +18,6 @@
   <properties>
     <java.version>1.8</java.version>
     <kotlin.version>1.0.1</kotlin.version>
-    <jetty.version>9.2.11.v20150529</jetty.version>
     <ebeanorm-enhancement.plugin.args>debug=0</ebeanorm-enhancement.plugin.args>
     <querybean-maven-plugin.version>2.1.1</querybean-maven-plugin.version>
     <avaje-ebeanorm-mavenenhancer.version>4.9.1</avaje-ebeanorm-mavenenhancer.version>
@@ -58,6 +57,18 @@
     </dependency>
 
     <dependency>
+      <groupId>net.java.dev.jna</groupId>
+      <artifactId>jna</artifactId>
+      <version>4.2.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>18.0</version>
+    </dependency>
+
+    <dependency>
       <groupId>com.google.inject</groupId>
       <artifactId>guice</artifactId>
       <version>4.0</version>
@@ -82,16 +93,34 @@
     </dependency>
 
     <dependency>
-      <groupId>org.avaje.ebeanorm</groupId>
-      <artifactId>avaje-ebeanorm</artifactId>
-      <version>7.5.1</version>
+      <groupId>org.avaje.metric</groupId>
+      <artifactId>avaje-metric-core</artifactId>
+      <version>4.4.2</version>
     </dependency>
 
     <!--<dependency>-->
       <!--<groupId>org.avaje.ebeanorm</groupId>-->
-      <!--<artifactId>avaje-ebeanorm-elastic</artifactId>-->
-      <!--<version>1.1.1</version>-->
+      <!--<artifactId>avaje-ebeanorm-hazelcast</artifactId>-->
+      <!--<version>1.2.1-SNAPSHOT</version>-->
     <!--</dependency>-->
+
+    <dependency>
+      <groupId>org.avaje.ebeanorm</groupId>
+      <artifactId>avaje-ebeanorm-ignite</artifactId>
+      <version>1.2.1-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.avaje.ebeanorm</groupId>
+      <artifactId>avaje-ebeanorm-elastic</artifactId>
+      <version>1.1.3</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.avaje.ebeanorm</groupId>
+      <artifactId>avaje-ebeanorm</artifactId>
+      <version>7.9.1-SNAPSHOT</version>
+    </dependency>
 
     <dependency>
       <groupId>org.avaje.ebeanorm</groupId>
@@ -147,9 +176,29 @@
           <tiles>
             <tile>org.avaje.tile:java-compile:1.1</tile>
             <tile>org.avaje.tile:kotlin-compile:1.1</tile>
-            <tile>org.avaje.tile:ebean-enhancement:1.1</tile>
+            <tile>org.avaje.tile:ebean-enhancement:1.2</tile>
           </tiles>
         </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.avaje.metric</groupId>
+        <artifactId>enhance-maven-plugin</artifactId>
+        <version>4.3.1</version>
+        <executions>
+          <execution>
+            <id>main</id>
+            <phase>process-classes</phase>
+            <configuration>
+              <!--<classSource>target/classes</classSource>-->
+              <packages>org.example.**</packages>
+              <transformArgs>debug=1</transformArgs>
+            </configuration>
+            <goals>
+              <goal>enhance</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
 
     </plugins>

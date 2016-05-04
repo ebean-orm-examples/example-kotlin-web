@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hazelcast-client xsi:schemaLocation="http://www.hazelcast.com/schema/client-config http://www.hazelcast.com/hazelcast-client-config-3.6.xsd"
+           xmlns="http://www.hazelcast.com/schema/client-config"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+
+  <near-cache name="*org.example.domain.Customer">
+    <max-size>1000</max-size>
+    <eviction-policy>LRU</eviction-policy>
+  </near-cache>
+
+  <near-cache name="BEAN-org.example.domain.Customer">
+    <max-size>5000</max-size>
+    <eviction-policy>LRU</eviction-policy>
+  </near-cache>
+
+</hazelcast-client>

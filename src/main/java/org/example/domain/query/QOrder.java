@@ -2,6 +2,7 @@ package org.example.domain.query;
 
 import com.avaje.ebean.EbeanServer;
 import org.avaje.ebean.typequery.PEnum;
+import org.avaje.ebean.typequery.PLocalDate;
 import org.avaje.ebean.typequery.PLong;
 import org.avaje.ebean.typequery.PSqlDate;
 import org.avaje.ebean.typequery.PTimestamp;
@@ -36,8 +37,8 @@ public class QOrder extends TQRootBean<Order,QOrder> {
   public PTimestamp<QOrder> whenCreated;
   public PTimestamp<QOrder> whenModified;
   public PEnum<QOrder,Status> status;
-  public PSqlDate<QOrder> orderDate;
-  public PSqlDate<QOrder> shipDate;
+  public PLocalDate<QOrder> orderDate;
+  public PLocalDate<QOrder> shipDate;
   public QAssocCustomer<QOrder> customer;
   public QAssocAddress<QOrder> shippingAddress;
   public QAssocOrderDetail<QOrder> details;
